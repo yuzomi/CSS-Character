@@ -99,27 +99,32 @@ body {
 }
 
 .door-left, .door-right {
-	position: absolute;
-	height: 100%;
-	width: 50%;
-	top: 0%;
-	transition: all ease 0.3s;
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  top: 0%;
+  transition: all ease 0.3s;
   z-index: 1000;
 }
+
 .door-left {
 	left: 0%;
 	background-color: rgb(192, 212, 249);
 }
+
 .door-right {
 	left: 50%;
 	background-color: rgb(168, 198, 253);
 }
+
 .container:hover .door-left{
 	left: -50%;
 }
+
 .container:hover .door-right{
 	left: 100%;
 }
+
 
 .tori {
   padding-top: 10rem;
@@ -571,10 +576,12 @@ body {
   height: var(--leg-inner-height, 1rem);
   background: var(--leg-inner-color);
 }
+
 .tori-leg-left {
   left: 0.25rem;
   transform: rotate(var(--leg-rotate-left, 0deg));
 }
+
 .tori-leg-right {
   right: 0.25rem;
   transform: rotate(var(--leg-rotate-right, 0deg));
