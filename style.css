@@ -1,0 +1,860 @@
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* animation */
+
+@keyframes blink {
+  0%, 9%, 11%, 19%, 22%, 69%, 72%, 100% {
+    transform: scaleY(1);
+  }
+  10%, 20%, 70% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes earMoveLeft {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes earMoveRight {
+  0%, 100% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+}
+
+@keyframes twinkle {
+  50% {
+    transform: scale(0.5);
+    opacity: 0.5;
+    }
+  }
+
+@keyframes bounce {
+    0%   {margin: 7%;}
+    50%  {margin: 7.5%;}
+    100%  {margin: 7%;}
+}
+
+@keyframes bounce2 {
+  0%   {margin-top: 7%;}
+  50%  {margin-bottom: 9%;}
+  100%  {margin-bottom: 7%;}
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(40deg);
+  }
+}
+
+
+* {
+  box-sizing: border-box;
+  cursor: url(https://cur.cursors-4u.net/symbols/sym-7/sym631.ani), url(https://cur.cursors-4u.net/symbols/sym-7/sym631.png), auto !important;
+}
+
+
+body {
+  background-color: #8BC6EC;
+  background-image: linear-gradient(180deg, #022153 0%, #8baaec 70%, #feb6df 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 250vh;
+  line-height: 1.5;
+  font-family: 'Cafe24Ssurround';
+  color: gray;
+}
+
+.container {
+  position: fixed;
+  display: grid;
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+  border-radius: 50%;
+  background-color: rgb(222, 233, 254);
+  box-shadow: 0 0 15px 10px rgb(220, 227, 255);
+  overflow: hidden;
+  justify-content: center;
+  align-content: space-evenly;
+  justify-items: center;
+  z-index: 10000;
+  animation: bounce 5s infinite;
+}
+
+.door-left, .door-right {
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	top: 0%;
+	transition: all ease 0.3s;
+  z-index: 1000;
+}
+.door-left {
+	left: 0%;
+	background-color: rgb(192, 212, 249);
+}
+.door-right {
+	left: 50%;
+	background-color: rgb(168, 198, 253);
+}
+.container:hover .door-left{
+	left: -50%;
+}
+.container:hover .door-right{
+	left: 100%;
+}
+
+.tori {
+  padding-top: 10rem;
+  animation: bounce2 1.8s infinite;
+}
+
+/* tori title */
+.tori-title {
+  position: absolute;
+  top: 30px;
+  left: 43px;
+  z-index: 10000;
+  grid-column: 1;
+  grid-row: 1/2;
+  padding: 0.75rem 1rem;
+  border-radius: 50%;
+  box-shadow: 0.25rem 0.25rem 0 rgb(74, 131, 246);
+  background-color: rgb(105, 175, 255);
+  font-size: 2rem;
+  color: #fff;
+  transform: rotate(-10deg) translate(-0.2rem, -2rem);
+}
+
+/* 출퇴근 label */
+.tori-label {
+  position: relative;
+  grid-column: 2;
+  z-index: 1;
+  padding: 0.5em 1em;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+#label {
+  margin-top: 3rem;
+}
+
+#label-bye {
+  margin-bottom: 1rem;
+}
+
+.tori-label::before {
+  content: "";
+  position: absolute;
+  z-index: -1; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background-color: rgb(255, 192, 224);
+  transition: transform 0.2s ease-in-out;
+}
+
+.tori-label:hover {
+  color: rgb(255, 192, 224);
+}
+
+.tori-control {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tori-control:checked + .tori-label {
+  color: white;
+}
+
+.tori-control:checked + .tori-label::before {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transform: scaleX(1);
+}
+
+
+/* tori */
+.tori-section {
+  display: flex;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 1/2;
+}
+
+.tori-head {
+  position: relative;
+  z-index: 2;
+  height: 8.25rem;
+  width: 10.5rem;
+}
+
+.tori-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 45% 60%;
+  border-top-right-radius: 45% 60%;
+  border-bottom-right-radius: 40% 40%;
+  border-bottom-left-radius: 40% 40%;
+  background-color: var(--head-color);
+  overflow: hidden;
+}
+
+.tori-face-inner {
+  position: absolute;
+  top: var(--face-in-1-top, 0);
+  left: var(--face-in-1-left, 0);
+  height: var(--face-in-1-height, 0);
+  width: var(--face-in-1-width, 0);
+  border-radius: var(--face-in-1-border-radius, 0);
+  background-color: var(--face-in-1-background-color);
+  overflow: var(--face-in-1-overflow, visible);
+  box-shadow: 2px -5px 2px -10px var(--blush-color), inset -2px -2px 10px 3px var(--blush-color-2);;
+}
+
+.tori-face-inner::before, .tori-face-inner::after {
+  content: "";
+  position: absolute;
+}
+
+.tori-face-inner::before {
+  top: var(--face-in-2-top, 0);
+  left: var(--face-in-2-left, auto);
+  right: var(--face-in-2-right, auto);
+  height: var(--face-in-2-height, 0);
+  width: var(--face-in-2-width, 0);
+  border-radius: var(--face-in-2-border-radius, 0);
+  background-color: var(--face-in-2-background-color);
+  box-shadow: inset 5px 10px 25px 10px var(--face-in-2-background-color-2);
+}
+
+
+/* tori 눈 */
+.tori-eye {
+  border-radius: 50%;
+  border-bottom: 5px solid var(--eyes-bottom-color);
+  position: absolute;
+  z-index: 5;
+  top: 4.2rem;
+  height: 2.3rem;
+  width: 2.3rem;
+  background-color: var(--eyes-color);
+  box-shadow: 0 0 1px 0.5px var(--eyes-color), inset 0 0 0.1px 0.1px var(--eyes-line-color), inset 1.5px 0 5px -1px var(--eyes-line-color-2);
+  transform: rotate(-90deg);
+  animation: blink 6s infinite;
+}
+
+.tori-eye::before {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  height: 0.5rem;
+  width: 0.375rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.tori-eye-left {
+  left: 1.7rem;
+}
+
+.tori-eye-right {
+  right: 1.7rem;
+}
+
+.eye-dot {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    top: 7px;
+    left: 12px;
+    background-color: var(--eyes-r-color);
+    border-radius: 50%;
+    box-shadow: inset 0 0 2px 0.5px var(--eyes-color);
+}
+
+.eye-dot:before {
+    position: absolute;
+    content: "";
+    height: 0.3rem;
+    width: 0.3rem;
+    top: 0.5rem;
+    left: -0.4rem;
+    background: var(--eyes-f-color);
+    border-radius: 50%;
+    box-shadow: 0.5px 0.3px 1.2px 1px var(--eyes-f-color);
+    transform: rotate(180deg);
+}
+
+.eye-dot:after {
+  position: absolute;
+  content: "";
+  height: 1rem;
+  width: 0.5rem;
+  top: 0.7rem;
+  left: 0.2rem;
+  background: none;
+  border-radius: 50%;
+  box-shadow: 3px 0 1.5px 0 var(--eyes-s-color);
+  transform: rotate(90deg);
+}
+
+/* tori 볼 */
+.tori-blush {
+  position: absolute;
+  z-index: 4;
+  top: 5.4rem;
+  height: 1.5rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  background-color: var(--blush-color);
+  box-shadow: 0 2px 2px 2px var(--blush-color);
+  filter: blur(5px);
+  opacity: 0.5;
+}
+
+.tori-blush-left {
+  left: 1.6rem;
+}
+
+.tori-blush-right {
+  right: 1.6rem;
+}
+
+
+/* tori 코 */
+.tori-nose {
+  height: 15px;
+  width: 25px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 48%;
+  left: 50%;
+  z-index: 999;
+}
+
+.tori-nose:before, .tori-nose:after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 42px;
+  width: 8px;
+  height: 13px;
+  background: var(--nose-color);
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.tori-nose:after {
+  left: 5px;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* tori 입 */
+.tori-mouth {
+  position: absolute;
+  top: 6.3rem;
+  left: 5rem;
+}
+
+.tori-mouth:before {
+  content: "";
+  top: 0;
+  left: -12px;
+  width: 13px;
+  height: 10px;
+  border-radius: 50%/40%;
+  border-right: 2px solid var(--nose-color);
+  border-bottom: 2px solid var(--nose-color);
+  border-left: 2px solid transparent;
+  border-top: 2px solid transparent;
+  position: absolute;
+  z-index: 999;
+}
+
+.tori-mouth:after {
+  content: "";
+  top: 0;
+  left: 4px;
+  width: 13px;
+  height: 10px;
+  border-radius: 50%/40%;
+  border-right: 2px solid var(--nose-color);
+  border-bottom: 2px solid var(--nose-color);
+  border-left: 2px solid transparent;
+  border-top: 2px solid transparent;
+  position: absolute;
+  transform: rotateY(180deg);
+  z-index: 999;
+}
+
+.tori-mouthbottom {
+  height: 15px;
+  width: 20px;
+  border-radius: 70% 70% 70% 70%;
+  background-color: var(--mouth-inner-color);
+  background-image: var(--mouth-inner-color2);
+  border: 2px solid var(--mouth-line-color);
+  border-top: 2px solid transparent;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 90%;
+  left: 50.5%;
+  z-index: 0;
+} 
+
+/* tori 귀 */
+.tori-ear {
+  border-radius: 36% 64% 51% 49% / 74% 77% 23% 26%;
+  position: absolute;
+  top: -1.5rem;
+  height: 4rem;
+  width: 3.5rem;
+  background-color: var(--ear-color);
+  background-image: var(--ear-background, none);
+  background-position: var(--ear-background-position, 0 0);
+  background-size: var(--ear-background-size, auto);
+  transform-origin: 50px 100px;
+}
+
+.tori-ear::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  height: 60%;
+  width: 1.5rem;
+  border-radius: inherit;
+  background-color: var(--ear-inner-color);
+}
+
+.tori-ear-left {
+  border-radius: 64% 36% 51% 49% / 74% 77% 23% 26%;
+  left: 1rem;
+  top: -1.8rem;
+  transform: rotate(-10deg);
+  animation: earMoveLeft 5s infinite;
+}
+
+.tori-ear-right {
+  right: 1rem;
+  transform: rotate(5deg);
+  animation: earMoveRight 5s infinite;
+}
+
+/* tori 몸 */
+.tori-body {
+  position: relative;
+  z-index: 1;
+  top: -1.5rem;
+  left: 50%;
+  height: 4.5rem;
+  width: 4rem;
+  transform: translateX(-50%);
+}
+
+.tori-clothing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 50% 0.8rem;
+  border-bottom-left-radius: 50% 0.8rem;
+  z-index: 5;
+  transform: perspective(1rem) rotateX(7deg);
+  background-color: var(--clothing-color);
+  background-image: var(--clothing-background);
+  background-position: var(--clothing-background-position, 0 0);
+  background-size: var(--clothing-background-size);
+}
+
+/* tori 팔 */
+.tori-arm {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 50% 100%;
+  border-bottom-left-radius: 50% 100%;
+  position: absolute;
+  z-index: 2;
+  top: 1.5rem;
+  height: 3rem;
+  width: 1.5rem;
+  background-color: var(--arm-color);
+  transform-origin: top center;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.tori-arm::before {
+  content: "";
+  position: absolute;
+  top: var(--arm-inner-top, calc(100% - 1rem));
+  left: var(--arm-inner-left-left, 0);
+  width: var(--arm-inner-width, 100%);
+  height: var(--arm-inner-height, 1rem);
+  border-radius: var(--arm-inner-border-radius, 0);
+  background: var(--arm-inner-color);
+}
+
+.tori-arm-left {
+  left: 0;
+  transform: rotate(var(--arm-rotate-left, 40deg));
+}
+
+.tori-arm-right {
+  right: 0;
+  transform: rotate(var(--arm-rotate-right, -40deg));
+}
+
+.tori-arm-right::before {
+  left: var(--arm-inner-left-right, 0);
+}
+
+
+/* tori 다리 */
+.tori-leg {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 50% 100%;
+  border-bottom-left-radius: 50% 100%;
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  height: 2rem;
+  width: 1.75rem;
+  background-color: var(--leg-color);
+  transform-origin: top center;
+  overflow: hidden;
+  transition: transform 0.15s ease-in-out;
+  animation: bounce2 1.8s infinite;
+}
+
+.tori-leg::before {
+  content: "";
+  position: absolute;
+  top: var(--leg-inner-top, calc(100% - 1rem));
+  left: var(--leg-inner-left, 0);
+  width: var(--leg-inner-width, 100%);
+  height: var(--leg-inner-height, 1rem);
+  background: var(--leg-inner-color);
+}
+.tori-leg-left {
+  left: 0.25rem;
+  transform: rotate(var(--leg-rotate-left, 0deg));
+}
+.tori-leg-right {
+  right: 0.25rem;
+  transform: rotate(var(--leg-rotate-right, 0deg));
+}
+
+
+/* tori 출근 */
+#am7:checked ~ .tori-section .tori {
+  --head-color: rgb(88, 87, 87);
+  --ear-color: var(--head-color);
+  --ear-inner-color: #fff;
+  --clothing-color: rgb(88, 87, 87);
+  --arm-color: #fff;
+  --arm-inner-color: #fff;
+  --arm-rotate-left: 30deg;
+  --arm-rotate-right: -30deg;
+  --leg-color: var(--ear-inner-color);
+  --leg-rotate-left: 5deg;
+  --leg-rotate-right: -5deg;
+  --face-in-1-top: 1rem;
+  --face-in-1-left: 0.5rem;
+  --face-in-1-height: 100%;
+  --face-in-1-width: calc(100% - 1rem);
+  --face-in-1-border-radius: 50%;
+  --face-in-1-background-color: #fff;
+  --face-in-1-overflow: hidden;
+  --face-in-2-top: 0;
+  --face-in-2-left: 0;
+  --face-in-2-height: 2.7rem;
+  --face-in-2-width: 100%;
+  --face-in-2-border-radius: 0 0 50% 50% / 0 0 30% 30%;
+  --face-in-2-background-color: rgb(85, 84, 84);
+  --face-in-2-background-color-2: rgb(114, 114, 114);
+  --eyes-color: #444;
+  --eyes-line-color: #444;
+  --eyes-line-color-2: rgb(99, 98, 98);
+  --eyes-f-color: rgb(68, 68, 68);
+  --eyes-s-color: #444;
+  --eyes-bottom-color: rgb(48, 85, 155);
+  --blush-color: rgb(107, 104, 150);
+  --blush-color-2: rgb(112, 106, 182);
+  --nose-color: #444;
+  --mouth-line-color: #fff;
+  --mouth-inner-color: #fff;
+}
+
+/* tori 퇴근 */
+
+#pm5:checked ~ .tori-section .tori {
+  --head-color: #fb86d6;
+  --ear-color: var(--head-color);
+  --ear-inner-color: #fff7fd;
+  --clothing-color: #fff7fd;
+  --clothing-background: radial-gradient(#81b7fa 80%, transparent 40%);
+  --clothing-background-size: 1.3rem 1.3rem;
+  --clothing-background-position: 0 1rem;
+  --arm-color: var(--face-in-2-background-color);
+  --arm-inner-color: #fff7fd;
+  --arm-inner-top: calc(100% - 0.5rem);
+  --arm-inner-height: 1rem;
+  --arm-rotate-left: 100deg;
+  --arm-rotate-right: -70deg;
+  --leg-color: var(--head-color);
+  --leg-inner-color: var(--arm-inner-color);
+  --leg-inner-top: var(--arm-inner-top);
+  --leg-inner-height: var(--arm-inner-height);
+  --leg-rotate-right: -50deg;
+  --face-in-1-top: 1rem;
+  --face-in-1-left: 0.5rem;
+  --face-in-1-height: 100%;
+  --face-in-1-width: calc(100% - 1rem);
+  --face-in-1-border-radius: 50%;
+  --face-in-1-background-color: #fff7fd;
+  --face-in-1-overflow: hidden;
+  --face-in-2-top: 0;
+  --face-in-2-left: 0.1rem;
+  --face-in-2-height: 2.7rem;
+  --face-in-2-width: 100%;
+  --face-in-2-border-radius: 0 0 90% 90% / 0 0 90% 90%;
+  --face-in-2-background-color: #afd2fb;
+  --face-in-2-background-color-2: #529bf5;
+  --eyes-color: rgb(66, 72, 108);
+  --eyes-line-color: rgb(80, 90, 150);
+  --eyes-line-color-2:rgb(81, 94, 168);
+  --eyes-r-color: #fff;
+  --eyes-f-color: rgb(171, 171, 171);
+  --eyes-s-color: rgb(170, 170, 170);
+  --eyes-bottom-color: rgb(81, 94, 168);
+  --blush-color: rgb(248, 140, 194);
+  --blush-color-2: rgb(254, 112, 209);
+  --nose-color: rgb(66, 72, 108);
+  --mouth-line-color: var(--nose-color);
+  --mouth-inner-color: rgb(248, 179, 226);
+  --mouth-inner-color2: radial-gradient(#f98acb 10%, transparent 60%);
+}
+
+
+/* bg stars */
+
+.stars {
+  background-color: #ffe3de;
+  opacity: 0.8;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  animation-iteration-count: infinite;
+  position: absolute;
+  box-shadow: 0 0 6px 3px rgb(255, 227, 222);
+}
+
+.star-1 {
+  top: 13%;
+  left: 10%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 2s;
+  animation-name: twinkle;
+}
+
+.star-2 {
+  top: 40%;
+  left: 25%;
+  animation-duration: 3.3s;
+  animation-name: twinkle;
+}
+
+.star-3 {
+  top: 60%;
+  left: 45%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 3s;
+  animation-name: twinkle;
+}
+
+.star-4 {
+  top: 30%;
+  left: 60%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 2.3s;
+  animation-name: twinkle;
+}
+
+.star-5 {
+  top: 46%;
+  left: 89%;
+  animation-duration: 2.6s;
+  animation-name: twinkle;
+}
+
+.star-6 {
+  top: 18%;
+  left: 74%;
+  animation-duration: 2.9s;
+  animation-name: twinkle;
+}
+
+.star-7 {
+  top: 50%;
+  left: 8%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 3.7s;
+  animation-name: twinkle;
+}
+
+.star-8 {
+  top: 23%;
+  left: 35%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 2.7s;
+  animation-name: twinkle;
+  background: rgb(251, 251, 255);
+  box-shadow: 0 0 6px 3px rgb(202, 191, 228);
+}
+
+.star-9 {
+  top: 10%;
+  left: 51%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 2.3s;
+  animation-name: twinkle;
+  background: rgb(241, 241, 253);
+  box-shadow: 0 0 6px 3px rgb(135, 135, 214);
+}
+
+.star-10 {
+  top: 20%;
+  left: 95%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 4.5s;
+  animation-name: twinkle;
+  background: rgb(253, 253, 253);
+  box-shadow: 0 0 6px 3px rgb(218, 222, 251);
+}
+
+.star-11 {
+  top: 33%;
+  left: 5%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 3s;
+  animation-name: twinkle;
+  background: rgb(252, 252, 253);
+  box-shadow: 0 0 6px 3px rgb(228, 218, 251);
+}
+
+.star-12 {
+  top: 32%;
+  left: 81.5%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 2s;
+  animation-name: twinkle;
+  background: rgb(162, 162, 223);
+  box-shadow: 0 0 6px 3px rgb(159, 150, 207);
+}
+
+.star-13 {
+  top: 63%;
+  left: 20%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 3.2s;
+  animation-name: twinkle;
+  background: rgb(214, 214, 255);
+  box-shadow: 0 0 6px 3px rgb(169, 152, 207);
+}
+
+.star-14 {
+  top: 70%;
+  left: 70%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 4s;
+  animation-name: twinkle;
+}
+
+.star-15 {
+  top: 90%;
+  left: 4%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 2.3s;
+  animation-name: twinkle;
+}
+
+.star-16 {
+  top: 77%;
+  left: 37%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 3.7s;
+  animation-name: twinkle;
+  background: rgb(203, 203, 245);
+  box-shadow: 0 0 6px 3px rgb(198, 185, 228);
+}
+
+.star-17 {
+  top: 88%;
+  left: 95%;
+  height: 5px;
+  width: 5px;
+  animation-duration: 5s;
+  animation-name: twinkle;
+}
+
+.star-18 {
+  top: 99%;
+  left: 55%;
+  height: 3px;
+  width: 3px;
+  animation-duration: 4s;
+  animation-name: twinkle;
+  background: rgb(188, 188, 247);
+  box-shadow: 0 0 6px 3px rgb(157, 170, 244);
+}
+
+
