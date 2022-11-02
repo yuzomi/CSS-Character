@@ -4,4 +4,5 @@
 <br><br><br>
 [![](https://user-images.githubusercontent.com/102042383/193048625-1984b4ba-0a62-4fd4-9351-c3f0d8816aeb.gif)](https://yuzomi.github.io/CSS-Character/)
 
-<hr>
+
+![최우수상_최유정](https://user-images.githubusercontent.com/102042383/199548900-b409b5b1-8f99-4f86-b200-ee6d7f256cac.png)
